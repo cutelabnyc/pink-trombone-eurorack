@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "cs43l22.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "bank.h": "c",
+        "biquad.h": "c",
+        "glottis.h": "c",
+        "globals.h": "c"
+    }
+}
