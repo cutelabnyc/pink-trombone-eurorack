@@ -40,12 +40,12 @@ extern "C"
     // each variable.
 
     float tongueX = 1.0;
-    float tongueY = 0.3;
-    float constrictionX = 0.5;
-    float constrictionY = 0.3;
-    float fricativeIntensity = 0.6;
+    float tongueY = 1.0;
+    float constrictionX = 1.0;
+    float constrictionY = 1.0;
+    float fricativeIntensity = 0.0;
     bool muteAudio = false;
-    bool constrictionActive = true;
+    bool constrictionActive = false;
 
     t_tractProps *getTractProps();
 

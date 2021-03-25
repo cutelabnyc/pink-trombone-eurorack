@@ -7,6 +7,8 @@
 
 #include "tract.h"
 #include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include "../../include/globals.h"
 
@@ -345,7 +347,8 @@ void T_reshapeTract(tract_t *self, double deltaTime)
 
 void T_runStep(tract_t *self, double glottalOutput, double turbulenceNoise, double lambda, glottis_t *glottis)
 {
-    double updateAmplitudes = ((double)rand() / (double)RAND_MAX) < 0.1;
+    // double updateAmplitudes = ((double)rand() / (double)RAND_MAX) < 0.1;
+    bool updateAmplitudes = true;
 
     //mouth
     T_processTransients(self);

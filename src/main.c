@@ -145,8 +145,8 @@ void FillBuffer(uint32_t *buffer, uint16_t len, bool halfCallBack)
     double constrictionMin = -2.0;
     double constrictionMax = 2.0;
 
-    double constrictionIndex = tongueX * (double)T_getTractIndexCount(tract);
-    double constrictionDiameter = tongueY * (constrictionMax - constrictionMin) + constrictionMin;
+    double constrictionIndex = constrictionX * (double)T_getTractIndexCount(tract);
+    double constrictionDiameter = constrictionY * (constrictionMax - constrictionMin) + constrictionMin;
 
     if (constrictionActive == false)
     {
@@ -347,7 +347,7 @@ static void MX_I2S3_Init(void)
     hi2s3.Init.Standard = I2S_STANDARD_PHILIPS;
     hi2s3.Init.DataFormat = I2S_DATAFORMAT_16B;
     hi2s3.Init.MCLKOutput = I2S_MCLKOUTPUT_ENABLE;
-    hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_48K;
+    hi2s3.Init.AudioFreq = I2S_AUDIOFREQ_16K;
     hi2s3.Init.CPOL = I2S_CPOL_LOW;
     hi2s3.Init.ClockSource = I2S_CLOCK_PLL;
     hi2s3.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
