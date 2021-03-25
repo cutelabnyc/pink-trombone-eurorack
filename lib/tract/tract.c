@@ -12,8 +12,9 @@
 
 #define MAX_TRANSIENTS (20)
 
-void initializeTractProps(t_tractProps *props, int n)
+t_tractProps *initializeTractProps(int n)
 {
+    t_tractProps *props = malloc(sizeof(t_tractProps));
     props->n = n;
     props->bladeStart = 10;
     props->tipStart = 32;
@@ -28,10 +29,13 @@ void initializeTractProps(t_tractProps *props, int n)
     props->noseDiameter = (double *)calloc(props->noseLength, sizeof(double));
     props->noseStart = props->n - props->noseLength + 1;
     props->noseOffset = 0.8;
+
+    return props;
 }
 
-void T_init(tract_t *self, double sampleRate, double blockTime, t_tractProps *props)
+tract_t *T_init(double sampleRate, double blockTime, t_tractProps *props)
 {
+    tract_t *self = malloc(sizeof(tract_t));
     self->glottalReflection = 0.75f;
     self->lipReflection = -0.85f;
     self->lastObstruction = -1;
@@ -100,6 +104,8 @@ void T_init(tract_t *self, double sampleRate, double blockTime, t_tractProps *pr
     self->noseDiameter[0] = self->velumTarget;
     memcpy(self->tractProps->tractDiameter, self->diameter, sizeof(double) * self->tractProps->n);
     memcpy(self->tractProps->noseDiameter, self->noseDiameter, sizeof(double) * self->tractProps->noseLength);
+
+    return self;
 }
 
 long T_getTractIndexCount(tract_t *self)
@@ -308,7 +314,7 @@ void T_processTransients(tract_t *self)
 void T_reshapeTract(tract_t *self, double deltaTime)
 {
     double amount = deltaTime * self->movementSpeed;
-    ;
+
     int newLastObstruction = -1;
     for (int i = 0; i < self->tractProps->n; i++)
     {

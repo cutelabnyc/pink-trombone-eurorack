@@ -84,9 +84,9 @@ typedef struct tract
     double lipOutput;
 } tract_t;
 
-void initializeTractProps(t_tractProps *props, int n);
+t_tractProps *initializeTractProps(int n);
 
-void T_init(tract_t *self, double sampleRate, double blockSize, t_tractProps *p);
+tract_t *T_init(double sampleRate, double blockTime, t_tractProps *props);
 void T_destroy(tract_t *self);
 void T_runStep(tract_t *self, double glottalOutput, double turbulenceNoise, double lambda, glottis_t *glottis);
 void T_finishBlock(tract_t *self);

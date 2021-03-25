@@ -9,8 +9,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-void WH_init(whitenoise_t *self, long sampleLength)
+whitenoise_t *WH_init(long sampleLength)
 {
+    whitenoise_t *self = malloc(sizeof(whitenoise_t));
     self->index = 0;
     self->size = sampleLength;
     self->buffer = (double *)malloc(sampleLength * sizeof(double));
@@ -19,6 +20,7 @@ void WH_init(whitenoise_t *self, long sampleLength)
     {
         self->buffer[i] = ((double)rand() / (double)RAND_MAX) * 2.0 - 1.0;
     }
+    return self;
 }
 
 void WH_destroy(whitenoise_t *self)

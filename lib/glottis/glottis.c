@@ -11,8 +11,10 @@
 #include "../../include/globals.h"
 #include "noise.h"
 
-void GL_init(glottis_t *self, double sampleRate)
+glottis_t *GL_init(double sampleRate)
 {
+    glottis_t *self = malloc(sizeof(glottis_t));
+
     self->timeInWaveform = 0;
     self->oldFrequency = 140;
     self->newFrequency = 140;
@@ -31,6 +33,8 @@ void GL_init(glottis_t *self, double sampleRate)
 
     self->sampleRate = sampleRate;
     GL_setupWaveform(self, 0);
+
+    return self;
 }
 
 void GL_setupWaveform(glottis_t *self, double lambda)

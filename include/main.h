@@ -35,17 +35,21 @@ extern "C"
 
     void Error_Handler(void);
 
-    float tongueX = 0.0;
-    float tongueY = 0.0;
-    float constrictionX = 0.0;
-    float constrictionY = 0.0;
-    float fricativeIntensity = 0.0;
+    // NOTE: This is where the vocal constriction parameters are set. Assign potentiometers
+    // to these in the main loop above to make some cool sounds. The range is 0.0 to 1.0 for
+    // each variable.
+
+    float tongueX = 1.0;
+    float tongueY = 0.3;
+    float constrictionX = 0.5;
+    float constrictionY = 0.3;
+    float fricativeIntensity = 0.6;
     bool muteAudio = false;
-    bool constrictionActive = false;
+    bool constrictionActive = true;
 
     t_tractProps *getTractProps();
 
-    t_tractProps tractProps;
+    t_tractProps *tractProps;
     glottis_t *glottis;
     tract_t *tract;
     whitenoise_t *whiteNoise;

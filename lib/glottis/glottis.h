@@ -35,7 +35,7 @@ typedef struct glottis
     bool alwaysVoice;
 } glottis_t;
 
-void GL_init(glottis_t *self, double sampleRate);
+glottis_t *GL_init(double sampleRate);
 void GL_destroy(glottis_t *self);
 double GL_runStep(glottis_t *self, double lambda, double noiseSource);
 void GL_finishBlock(glottis_t *self);

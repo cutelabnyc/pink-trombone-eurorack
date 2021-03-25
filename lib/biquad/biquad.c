@@ -9,8 +9,9 @@
 #include <math.h>
 #include "../../include/globals.h"
 
-void BQ_init(biquad_t *self, double sampleRate)
+biquad_t *BQ_init(double sampleRate)
 {
+    biquad_t *self = malloc(sizeof(biquad_t));
     self->frequency = 200;
     self->q = 0.5f;
     self->gain = 1.0f;
@@ -22,6 +23,7 @@ void BQ_init(biquad_t *self, double sampleRate)
     self->sampleRate = sampleRate;
     self->twopiOverSampleRate = PI * 2.0 / self->sampleRate;
     BQ_updateCoefficients(self);
+    return self;
 }
 
 void BQ_updateCoefficients(biquad_t *self)

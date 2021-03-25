@@ -18,7 +18,7 @@ typedef struct biquad
     double sampleRate, twopiOverSampleRate;
 } biquad_t;
 
-void BQ_init(biquad_t *self, double sampleRate);
+biquad_t *BQ_init(double sampleRate);
 void BQ_destroy(biquad_t *self);
 void BQ_setFrequency(biquad_t *self, double f);
 void BQ_setQ(biquad_t *self, double f);

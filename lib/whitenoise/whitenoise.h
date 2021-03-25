@@ -17,7 +17,7 @@ typedef struct whitenoise
     long size;
 } whitenoise_t;
 
-void WH_init(whitenoise_t *self, long sampleLength);
+whitenoise_t *WH_init(long sampleLength);
 void WH_destroy(whitenoise_t *self);
 double WH_runStep(whitenoise_t *self);
 

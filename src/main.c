@@ -65,12 +65,12 @@ int main(void)
     MX_I2S3_Init();
     MX_ADC1_Init();
 
-    GL_init(glottis, SAMPLE_RATE);
-    initializeTractProps(tract->tractProps, 44);
-    T_init(tract, SAMPLE_RATE, I2S_BUFFER_SIZE, tract->tractProps);
-    WH_init(whiteNoise, SAMPLE_RATE * 2.0);
-    BQ_init(aspirateFilter, SAMPLE_RATE);
-    BQ_init(fricativeFilter, SAMPLE_RATE);
+    glottis = GL_init(SAMPLE_RATE);
+    tractProps = initializeTractProps(44);
+    tract = T_init(SAMPLE_RATE, I2S_BUFFER_SIZE, tractProps);
+    whiteNoise = WH_init(I2S_BUFFER_SIZE * 2.0);
+    aspirateFilter = BQ_init(SAMPLE_RATE);
+    fricativeFilter = BQ_init(SAMPLE_RATE);
 
     BQ_setGain(aspirateFilter, 1.0);
     BQ_setQ(aspirateFilter, 0.5);
@@ -145,11 +145,8 @@ void FillBuffer(uint32_t *buffer, uint16_t len, bool halfCallBack)
     double constrictionMin = -2.0;
     double constrictionMax = 2.0;
 
-    // NOTE: This is where the vocal constriction parameters are set. Assign potentiometers
-    // to these in the main loop above to make some cool sounds. The range is -2.0 to 2.0 for
-    // each variable. Here, X is set to 1.0 and Y is set to -1.0.
-    double constrictionIndex = 1.0f * (double)T_getTractIndexCount(tract);
-    double constrictionDiameter = -1.0f * (constrictionMax - constrictionMin) + constrictionMin;
+    double constrictionIndex = tongueX * (double)T_getTractIndexCount(tract);
+    double constrictionDiameter = tongueY * (constrictionMax - constrictionMin) + constrictionMin;
 
     if (constrictionActive == false)
     {
@@ -163,7 +160,7 @@ void FillBuffer(uint32_t *buffer, uint16_t len, bool halfCallBack)
 
     T_setRestDiameter(tract, tongueIndex, tongueDiameter);
     T_setConstriction(tract, constrictionIndex, constrictionDiameter, fricativeIntensity);
-    T_finishBlock(tract);
+    GL_finishBlock(glottis);
     T_finishBlock(tract);
 
     // if (this->muteAudio)
@@ -179,15 +176,6 @@ void FillBuffer(uint32_t *buffer, uint16_t len, bool halfCallBack)
     // }
 
     /** ======================================================== */
-
-    // for (c = 0; c < len; c++)
-    // {
-    //     // calculate sin
-    //     // a = (float)sin(osc_phi * 6.2832f) * 0.20f;
-    //     y = (int16_t)(a * 32767.0f);
-    //     dspBuffer[c] = ((uint32_t)(uint16_t)y) << 0 |
-    //                    ((uint32_t)(uint16_t)y) << 16;
-    // }
 
     memcpy(buffer, dspBuffer, len << 2);
 }
