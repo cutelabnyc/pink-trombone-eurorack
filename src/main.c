@@ -66,9 +66,9 @@ int main(void)
     MX_ADC1_Init();
 
     glottis = GL_init(SAMPLE_RATE);
-    tractProps = initializeTractProps(44);
+    tractProps = initializeTractProps(11);
     tract = T_init(SAMPLE_RATE, I2S_BUFFER_SIZE, tractProps);
-    whiteNoise = WH_init(I2S_BUFFER_SIZE * 2.0);
+    whiteNoise = WH_init(I2S_BUFFER_SIZE);
     aspirateFilter = BQ_init(SAMPLE_RATE);
     fricativeFilter = BQ_init(SAMPLE_RATE);
 

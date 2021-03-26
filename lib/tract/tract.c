@@ -12,7 +12,7 @@
 #include <math.h>
 #include "../../include/globals.h"
 
-#define MAX_TRANSIENTS (20)
+#define MAX_TRANSIENTS (10)
 
 t_tractProps *initializeTractProps(int n)
 {

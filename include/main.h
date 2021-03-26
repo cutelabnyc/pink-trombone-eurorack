@@ -30,7 +30,7 @@ extern "C"
 #include "tract.h"
 #include <stdbool.h>
 
-#define I2S_BUFFER_SIZE 512
+#define I2S_BUFFER_SIZE 2048
 #define SAMPLE_RATE hi2s3.Init.AudioFreq
 
     void Error_Handler(void);
